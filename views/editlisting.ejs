@@ -1,26 +1,106 @@
 <% layout('/layouts/boilerplate') -%>
 
-<body>
-  <h1>Edit a Listing</h1>
-  <form action="/listing/update/<%= readlisting._id %>?_method=PUT" method="POST">
-    <label>Title:</label><br>
-    <input type="text" name="listing[title]" value="<%= readlisting.title %>" required><br><br>
+<div class="row">
+  <div class="col-8 offset-2">
+    <h1>Edit Listing</h1>
+    <form
+      action="/listing/update/<%= readlisting._id %>?_method=PUT"
+      method="POST"
+      class="needs-validation"
+      novalidate
+    >
+      <!-- Title -->
+      <div class="mb-3">
+        <label for="title" class="form-label">Title:</label>
+        <input
+          type="text"
+          name="listing[title]"
+          id="title"
+          class="form-control"
+          value="<%= readlisting.title %>"
+          required
+        />
+        <div class="invalid-feedback">Please provide a title.</div>
+      </div>
 
-    <label>Description:</label><br>
-    <textarea  name="listing[description]"  required><%= readlisting.description %></textarea><br><br>
+      <!-- Description -->
+      <div class="mb-3">
+        <label for="description" class="form-label">Description:</label>
+        <textarea
+          name="listing[description]"
+          id="description"
+          class="form-control"
+          required
+        ><%= readlisting.description %></textarea>
+        <div class="invalid-feedback">Please provide a description.</div>
+      </div>
 
-    <label>Image URL:</label><br>
-    <input type="text" value="<%= readlisting.image.url %>"  name="listing[image[url]]" ><br><br>
+      <!-- Image URL -->
+      <div class="mb-3">
+        <label for="image" class="form-label">Image URL:</label>
+        <input
+          type="url"
+          name="listing[image]"
+          id="image"
+          class="form-control"
+          value="<%= readlisting.image %>"
+          placeholder="https://example.com/image.jpg"
+          required
+        />
+        <div class="invalid-feedback">Please provide a valid URL.</div>
+      </div>
 
-    <label>Price:</label><br>
-    <input type="number" name="listing[price]" value="<%= readlisting.price %>" required><br><br>
+      <!-- Price & Country -->
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="price" class="form-label">Price:</label>
+          <input
+            type="number"
+            name="listing[price]"
+            id="price"
+            class="form-control"
+            value="<%= readlisting.price %>"
+            min="1"
+            step="0.01"
+            required
+          />
+          <div class="invalid-feedback">Please provide a valid price.</div>
+        </div>
+        <div class="col-md-8 mb-3">
+          <label for="country" class="form-label">Country:</label>
+          <input
+            type="text"
+            name="listing[country]"
+            id="country"
+            class="form-control"
+            value="<%= readlisting.country %>"
+            required
+          />
+          <div class="invalid-feedback">Please provide a country.</div>
+        </div>
+      </div>
 
-    <label>Location:</label><br>
-    <input type="text" name="listing[location]"value="<%= readlisting.location %>" required><br><br>
+      <!-- Location -->
+      <div class="mb-3">
+        <label for="location" class="form-label">Location:</label>
+        <input
+          type="text"
+          name="listing[location]"
+          id="location"
+          class="form-control"
+          value="<%= readlisting.location %>"
+          placeholder="Pune, Maharashtra"
+          required
+        />
+        <div class="invalid-feedback">Please provide a location.</div>
+      </div>
 
-    <label>Country:</label><br>
-    <input type="text" name="listing[country]"value="<%= readlisting.country %>" required><br><br>
+      <!-- Submit -->
+      <button class="btn btn-dark add-btn mb-3" type="submit">
+        Update Listing
+      </button>
+    </form>
+  </div>
+</div>
 
-    <button type="submit">Update Listing</button>
-  </form>
-</body>
+<script src="./js/script.js"></script>

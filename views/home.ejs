@@ -6,9 +6,9 @@
       <div class="col">
         <a href="/listings/<%= list._id %>" class="text-decoration-none text-dark">
           <div class="card h-100 shadow-sm border-0 transition-hover">
-            <% if (list.image && list.image.url) { %>
+            <% if (list.image) { %>
               <img 
-                src="<%= list.image.url %>" 
+                src="<%= list.image %>" 
                 class="card-img-top" 
                 alt="<%= list.title %>" 
                 style="object-fit: cover; height: 15rem;" 

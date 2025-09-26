@@ -3,8 +3,12 @@
 <div class="row">
   <div class="col-8 offset-2">
     <h1>Create a New Listing</h1>
-    <form action="/listing/new" method="POST" class="needs-validation" novalidate>
-      
+    <form
+      action="/listing/new"
+      method="POST"
+      class="needs-validation"
+      novalidate
+    >
       <!-- Title -->
       <div class="mb-3">
         <label for="title" class="form-label">Title:</label>
@@ -31,11 +35,12 @@
       </div>
 
       <!-- Image URL -->
+
       <div class="mb-3">
         <label for="image" class="form-label">Image URL:</label>
         <input
           type="url"
-          name="listing[image][url]"
+          name="listing[image]"
           id="image"
           class="form-control"
           placeholder="https://example.com/image.jpg"
@@ -86,9 +91,9 @@
       </div>
 
       <!-- Submit -->
-      <button class="btn btn-dark add-btn" type="submit">Add Listing</button>
+      <button class="btn btn-dark add-btn mb-3" type="submit">
+        Add Listing
+      </button>
     </form>
   </div>
 </div>
-
-
