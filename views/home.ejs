@@ -1,4 +1,7 @@
-<% layout('/layouts/boilerplate') -%>
+<% layout('/layouts/boilerplate') -%> <% if (success && success.length > 0) { %>
+  <div class="alert alert-success"><%= success[0] %></div>
+<% } %>
+
 
 <div class="container my-5">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
