@@ -6,7 +6,11 @@ const path = require("path");
 const engine = require("ejs-mate");
 const methodOverride = require("method-override");
 const ExpressError = require("./utils/expressErrors");
-
+const Session = require('express-session')
+const flash = require('connect-flash')
+const passport = require('passport')
+const PassportLocalMongoose = require('passport-local-mongoose')
+const passportLocal = require('passport-local')
 // Routes
 const listingRoutes = require("./routes/listings.routes");
 const reviewRoutes = require("./routes/reviews.routes");
@@ -29,6 +33,35 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
+
+const sessionOption = {
+  secret : "mysecretcode",
+  resave : false,
+  saveUninitialized: true,
+  cookie : {
+    expires : Date.now() + 7 * 24 * 60 * 60 * 1000,
+    maxAge : 7 * 24 * 60 * 60 * 1000,
+    httpOnly : true,
+
+  },
+}
+
+app.use(Session(sessionOption))
+app.use(flash())
+app.use((req,res,next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  next();
+
+})
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 
 // ================= ROUTES =================
 app.use("/", userRoutes);                      
